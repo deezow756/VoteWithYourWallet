@@ -1,0 +1,37 @@
+﻿
+.custom-ul {
+    padding-inline-start: 0;
+}
+
+h1 {
+    font-family: sans-serif;
+    text-align: center;
+}
+
+form .error {
+    color: red;
+}
+
+body {
+    height: 100%;
+}
+
+html {
+    height: 100%;
+}
+
+header {
+    height: 5%;
+}
+
+main {
+    height: 95%;
+}
+
+.display-none {
+    display: none;
+}
+
+.h-95 {
+    height: 95%;
+}

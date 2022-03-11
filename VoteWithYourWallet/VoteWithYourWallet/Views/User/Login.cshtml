@@ -1,0 +1,42 @@
+﻿@model VoteWithYourWallet.Models.Login
+@{
+}
+
+<script src="~/js/login.js"></script>
+
+<div class="container h-95">
+    <div class="row h-95 justify-content-center align-items-center">
+        <div class="col-lg-6 col-md-12 col-sm-12">
+            <div class="mb-5 text-dark display-2 text-center">Login</div>
+            <form asp-controller="User" asp-action="Login" method="post" id="login">
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+                <div class="mb-3 text-center">
+                    <label class="col-form-label  text-center" asp-for="Email">Email Address</label>
+                    <input id="email" type="email" asp-for="Email" class="form-control" />
+                    <h6 id="errorEmail" asp-validation-for="Email" class="text-danger"></h6>
+                </div>
+                <div class="mb-3 text-center">
+                    <label class="col-form-label text-center" asp-for="Password">Password</label>
+                    <input id="password" type="password" asp-for="Password" class="form-control" />
+                    <h6 id="errorPassword" asp-validation-for="Password" class="text-danger"></h6>
+                </div>
+                <div class="mb-3 text-center">
+                    <input type="checkbox" asp-for="RememberMe" class="form-check-input" />
+                    <label class="form-check-label" asp-for="RememberMe">Remember Me?</label>
+                </div>
+                <div class="mb-3 text-center form-group">
+                    <button type="submit" class="btn btn-primary">Login</button>
+
+                </div>
+                <div class=" text-center">
+                    <h4 id="errorLogin" class="text-danger"></h4>
+                </div>
+            </form>
+
+            <div class="text-center">
+                <label class="p-5">Not Registered? <a class="text-black-50 text-decoration-none" href="/User/Register">Create An Account</a></label>
+            </div>
+        </div>
+    </div>    
+</div>

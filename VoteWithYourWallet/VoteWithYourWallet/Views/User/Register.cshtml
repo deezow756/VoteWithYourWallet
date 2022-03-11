@@ -1,0 +1,41 @@
+﻿@model VoteWithYourWallet.Models.Register
+@{
+}
+
+<script src="~/js/register.js"></script>
+
+<div class="container h-95">
+    <div class="row h-95 justify-content-center align-items-center">
+        <div class="col-lg-6 col-md-12 col-sm-12">
+            <h1 class="mb-4 text-dark">Create An Account</h1>
+            <form id="register" name="register" asp-controller="User" asp-action="Register" method="post">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="mb-3 text-center">
+                    <label class="col-form-label" asp-for="Username">Username</label>
+                    <input id="username" type="text" asp-for="Username" class="form-control" />
+                    <h6 id="errorUsername" class="text-danger mt-2"></h6>
+                </div>
+                <div class="mb-3 text-center">
+                    <label class="col-form-label" asp-for="Email">Email Address</label>
+                    <input id="email" type="email" asp-for="Email" class="form-control" />
+                    <h6 id="errorEmail" class="text-danger mt-2"></h6>
+                </div>
+                <div class="mb-3 text-center">
+                    <label class="col-form-label" asp-for="Password">Password</label>
+                    <input id="password" type="password" asp-for="Password" class="form-control" />
+                    <h6 id="errorPassword" class="text-danger mt-2"></h6>
+                </div>
+
+                <div class="mb-3 text-center">
+                    <label class="col-form-label" asp-for="ConfirmPassword">Confirm Password</label>
+                    <input id="confirmPassword" type="password" asp-for="ConfirmPassword" class="form-control" />
+                    <h6 id="errorConfirmPassword" class="text-danger mt-2"></h6>
+                </div>
+
+                <div class="mt-5 text-center">
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,100 @@
+﻿@model VoteWithYourWallet.Models.Cause
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@{
+    ViewData["Title"] = "Cause";
+}
+
+<script src="~/js/cause-details.js"></script>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v13.0" nonce="RIAaC923"></script>
+
+<div class="container">
+    <div class="row justify-content-center ">
+        <div class="col-lg-10 col-md-10 col-sm-12 mt-5">
+            <div class="card">
+                <input id="causeId" value="@Model.Id" hidden />
+
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <input id="userId" value="@UserManager.FindByNameAsync(User.Identity.Name).Result.Id" hidden />
+                    <input id="userName" value="@User.Identity.Name" hidden />
+                    <input id="publisher" value="@Model.IdentityUser.UserName" hidden />
+                }
+                else
+                {
+                    <input id="userName" value="" hidden />
+                }
+                <div class="card-header">
+                    <div class="display-2 text-center">@Model.Name</div>
+                </div>
+                <div class="card-body">
+                    <h3 class="text-capitalize text-center m-3">Subject: @Model.Subject</h3>
+
+                    <p class="text-center mt-5">@Model.Description</p>
+
+                    <h6 class="text-capitalize text-center mt-5 mb-3">Published by: @Model.IdentityUser.UserName</h6>
+
+                    @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                    {
+                        <div class="p-3 text-center">
+                            <form id="deleteCauseForm" method="post" asp-controller="Cause" asp-action="Delete" asp-route-id="@Model.Id">
+                            </form>
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirm-delete">Delete Cause</button>
+                        </div>
+                    }
+                </div>
+                <div class="card-footer">
+                    <div class="row justify-content-center align-items-center">
+                        <ul class="list-inline w-auto">
+                            <i id="ShareFacebook" data-shareurl="/Cause/Details/4" class="fab fa-facebook-square fa-4x mx-2 btn"></i>
+                            <i class="fab fa-twitter-square fa-4x mx-2 btn"></i>
+                            <i class="fab fa-reddit-square fa-4x mx-2 btn"></i>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 col-sm-12 mt-5">
+            <h2 id="lblNoSignatures" class="p-5 text-center display-none"></h2>
+
+            <div class="text-center">
+                <h4 id="signatureCount"></h4>
+                <ul id="signatureList" class="custom-ul list-group infinite-scroll h-25 mt-3 overflow-hidden"></ul>
+            </div>
+        </div>
+
+
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <div id="btnForm" class="m-3 text-center">
+                <form method="post" asp-controller="Cause" asp-action="AddSignature" asp-route-id="@Model.Id">
+                    <button id="btnSignUp" class="btn btn-primary display-none" type="submit">Sign up to cause!</button>
+                </form>
+            </div>
+        }
+    </div>
+
+    <div id="banner" class="text-center p-3 display-none m-3">
+        <h3 id="bannerMessage" class="text-white p-3 display-none"></h3>
+    </div>
+</div>
+
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModelLabel">Warning!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are You Sure You Want To The Delete Cause @Model.Name?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger btn-confirm">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
