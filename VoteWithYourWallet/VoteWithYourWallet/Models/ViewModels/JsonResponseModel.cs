@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace VoteWithYourWallet.Models
 {
-    public class JsonResponse
+    public class JsonResponseModel
     {
         public bool status { get; set; }
         public string msg { get; set; }

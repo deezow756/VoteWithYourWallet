@@ -77,10 +77,10 @@ function checkUser(username) {
             url: "/Cause/GetSignatures",
             data: { causeId: $("#causeId").val() },
             success: function (msg) {
-
+                
                 var obj = JSON.parse(JSON.stringify(msg));
                 if (obj.status) {
-                    var arr = $.parseJSON(obj.msg)
+                    var arr = $.parseJSON(obj.msg);
 
                     var state = false;
 
@@ -93,7 +93,9 @@ function checkUser(username) {
                     });
 
                     if (!state) {
-                        $("#btnSignUp").show();
+                        if (username != $("#publisher").val()) {
+                            $("#btnSignUp").show();
+                        }
                     }
                 }
                 else {
@@ -113,6 +115,9 @@ $(document).ready(function () {
     if ($("#userName").val() != "") {
         checkUser($("#userName").val());
     }
+    else {
+        $("#lblNoSignatures").show().text("No Signatures");
+    }
 
     pollSignatures();
 
@@ -128,11 +133,11 @@ $(document).ready(function () {
         $("#deleteCauseForm").submit();
     });
 
-    $("#ShareFacebook").on("click", function (e) {
-        FB.ui({
-            display: 'popup',
-            method: 'share',
-            href: window.location.href,
-        }, function (response) {});
-    }); 
+    //$("#ShareFacebook").on("click", function (e) {
+    //    FB.ui({
+    //        display: 'popup',
+    //        method: 'share',
+    //        href: window.location.href,
+    //    }, function (response) {});
+    //}); 
 });

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VoteWithYourWallet.Models;
+using VoteWithYourWallet.Models.ViewModels;
 
 namespace VoteWithYourWallet.Controllers
 {
@@ -53,24 +54,24 @@ namespace VoteWithYourWallet.Controllers
         [Route("User/CheckLogin")]
         public async Task<JsonResult> CheckLogin(string email, string password)
         {
-            JsonResponse model = null;
+            JsonResponseModel model = null;
             var user = await userManager.FindByEmailAsync(email);
             if (user != null)
             {
                 if (await userManager.CheckPasswordAsync(user, password))
                 {
-                    model = new JsonResponse() { status = true, msg = "Successfully Logged In" };
+                    model = new JsonResponseModel() { status = true, msg = "Successfully Logged In" };
                     return new JsonResult(model);
                 }
                 else
                 {
-                    model = new JsonResponse() { status = false, msg = "Wrong Password" };
+                    model = new JsonResponseModel() { status = false, msg = "Wrong Password" };
                     return new JsonResult(model);
                 }
             }
             else
             {
-                model = new JsonResponse() { status = false, msg = "No Account Registered With Email: " + email };
+                model = new JsonResponseModel() { status = false, msg = "No Account Registered With Email: " + email };
                 return new JsonResult(model);
             }
         }
@@ -79,16 +80,16 @@ namespace VoteWithYourWallet.Controllers
         [Route("User/CheckEmail")]
         public async Task<JsonResult> CheckEmail(string email)
         {
-            JsonResponse model = null;
+            JsonResponseModel model = null;
             var user = await userManager.FindByEmailAsync(email);
             if (user != null)
             {
-                model = new JsonResponse() { status = true };
+                model = new JsonResponseModel() { status = true };
                 return new JsonResult(model);
             }
             else
             {
-                model = new JsonResponse() { status = false };
+                model = new JsonResponseModel() { status = false };
                 return new JsonResult(model);
             }
         }
@@ -97,16 +98,16 @@ namespace VoteWithYourWallet.Controllers
         [Route("User/CheckUsername")]
         public async Task<JsonResult> CheckUsername(string username)
         {
-            JsonResponse model = null;
+            JsonResponseModel model = null;
             var user = await userManager.FindByNameAsync(username);
             if (user != null)
             {
-                model = new JsonResponse() { status = true, msg = "Username already taken" };
+                model = new JsonResponseModel() { status = true, msg = "Username already taken" };
                 return new JsonResult(model);
             }
             else
             {
-                model = new JsonResponse() { status = false, msg = "" };
+                model = new JsonResponseModel() { status = false, msg = "" };
                 return new JsonResult(model);
             }
         }

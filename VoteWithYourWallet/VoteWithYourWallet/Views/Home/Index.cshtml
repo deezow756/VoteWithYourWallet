@@ -1,10 +1,12 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="container h-95">
     <div class="row h-95 justify-content-center align-items-center">
-        <div class="col-lg-10 col-md-12 col-sm-12 text-center">
+        <div class="col-lg-12 col-md-12 col-sm-12 text-center">
             <h1 class="display-1 p-5">Welcome</h1>
             <h2 class="my-3">About Us</h2>
             <p>Here you can publicly express your objection to unethical subject such as creative tax avoidance, unfair employment practices, racism, disregard of environmental impact and other unethical business and political practices.</p>
@@ -12,7 +14,10 @@
 
             <h2 class="my-3">Getting Started</h2>
             <p>To get started, simply signup and create your own cause!</p>
-            <p><a class="btn btn-primary" href="/User/Register">Signup</a></p>
+            @if (!SignInManager.IsSignedIn(User))
+            {
+                <p><a class="btn btn-primary" href="/User/Register">Signup</a></p>
+            }
 
             <h2 class="my-3">Be Supportive</h2>
             <p>Dont forgot to support others on there causes too!</p>

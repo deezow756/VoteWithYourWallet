@@ -130,6 +130,7 @@ $(document).ready(function () {
     });
 
     $("#register").submit(function (e) {
+        $("#errors").text("");
         if (!forceRegister) {
             e.preventDefault();
             checkRegister();

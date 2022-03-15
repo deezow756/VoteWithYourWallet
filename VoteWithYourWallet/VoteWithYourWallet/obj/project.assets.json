@@ -6604,11 +6604,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Uni\\5th Year\\Web\\CourseworkPart2\\VoteWithYourWallet\\VoteWithYourWallet\\VoteWithYourWallet.csproj",
+      "projectUniqueName": "C:\\GitHub\\VoteWithYourWallet\\VoteWithYourWallet\\VoteWithYourWallet\\VoteWithYourWallet.csproj",
       "projectName": "VoteWithYourWallet",
-      "projectPath": "E:\\Uni\\5th Year\\Web\\CourseworkPart2\\VoteWithYourWallet\\VoteWithYourWallet\\VoteWithYourWallet.csproj",
+      "projectPath": "C:\\GitHub\\VoteWithYourWallet\\VoteWithYourWallet\\VoteWithYourWallet\\VoteWithYourWallet.csproj",
       "packagesPath": "C:\\Users\\Deezow\\.nuget\\packages\\",
-      "outputPath": "E:\\Uni\\5th Year\\Web\\CourseworkPart2\\VoteWithYourWallet\\VoteWithYourWallet\\obj\\",
+      "outputPath": "C:\\GitHub\\VoteWithYourWallet\\VoteWithYourWallet\\VoteWithYourWallet\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\"

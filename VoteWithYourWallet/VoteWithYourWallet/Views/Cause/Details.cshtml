@@ -1,4 +1,4 @@
-﻿@model VoteWithYourWallet.Models.Cause
+﻿@model VoteWithYourWallet.Models.ViewModels.CauseDetailsModel
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
@@ -14,50 +14,48 @@
     <div class="row justify-content-center ">
         <div class="col-lg-10 col-md-10 col-sm-12 mt-5">
             <div class="card">
-                <input id="causeId" value="@Model.Id" hidden />
+                <input id="causeId" value="@Model.Cause.Id" hidden />
 
                 @if (SignInManager.IsSignedIn(User))
                 {
                     <input id="userId" value="@UserManager.FindByNameAsync(User.Identity.Name).Result.Id" hidden />
                     <input id="userName" value="@User.Identity.Name" hidden />
-                    <input id="publisher" value="@Model.IdentityUser.UserName" hidden />
+                    <input id="publisher" value="@Model.Cause.IdentityUser.UserName" hidden />
                 }
                 else
                 {
                     <input id="userName" value="" hidden />
                 }
                 <div class="card-header">
-                    <div class="display-2 text-center">@Model.Name</div>
+                    <div class="display-2 text-center">@Model.Cause.Name</div>
                 </div>
                 <div class="card-body">
-                    <h3 class="text-capitalize text-center m-3">Subject: @Model.Subject</h3>
+                    <h3 class="text-capitalize text-center m-3">Subject: @Model.Cause.Subject</h3>
 
-                    <p class="text-center mt-5">@Model.Description</p>
+                    <p class="text-center mt-5">@Model.Cause.Description</p>
 
-                    <h6 class="text-capitalize text-center mt-5 mb-3">Published by: @Model.IdentityUser.UserName</h6>
+                    <h6 class="text-capitalize text-center mt-5 mb-3">Published by: @Model.Cause.IdentityUser.UserName</h6>
 
                     @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                     {
                         <div class="p-3 text-center">
-                            <form id="deleteCauseForm" method="post" asp-controller="Cause" asp-action="Delete" asp-route-id="@Model.Id">
+                            <form id="deleteCauseForm" method="post" asp-controller="Cause" asp-action="Delete" asp-route-id="@Model.Cause.Id">
                             </form>
                             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirm-delete">Delete Cause</button>
                         </div>
                     }
                 </div>
                 <div class="card-footer">
-                    <div class="row justify-content-center align-items-center">
-                        <ul class="list-inline w-auto">
-                            <i id="ShareFacebook" data-shareurl="/Cause/Details/4" class="fab fa-facebook-square fa-4x mx-2 btn"></i>
-                            <i class="fab fa-twitter-square fa-4x mx-2 btn"></i>
-                            <i class="fab fa-reddit-square fa-4x mx-2 btn"></i>
-                        </ul>
+                    <div class="row">
+                        <div class="fb-share-button" data-href="@Model.CurrentURL" data-layout="button" data-size="large">
+                            <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-md-8 col-sm-12 mt-5">
-            <h2 id="lblNoSignatures" class="p-5 text-center display-none"></h2>
+            <h1 id="lblNoSignatures" class="p-5 text-center display-none"></h1>
 
             <div class="text-center">
                 <h4 id="signatureCount"></h4>
@@ -69,7 +67,7 @@
         @if (SignInManager.IsSignedIn(User))
         {
             <div id="btnForm" class="m-3 text-center">
-                <form method="post" asp-controller="Cause" asp-action="AddSignature" asp-route-id="@Model.Id">
+                <form method="post" asp-controller="Cause" asp-action="AddSignature" asp-route-id="@Model.Cause.Id">
                     <button id="btnSignUp" class="btn btn-primary display-none" type="submit">Sign up to cause!</button>
                 </form>
             </div>
@@ -89,7 +87,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Are You Sure You Want To The Delete Cause @Model.Name?
+                Are You Sure You Want To The Delete Cause @Model.Cause.Name?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>

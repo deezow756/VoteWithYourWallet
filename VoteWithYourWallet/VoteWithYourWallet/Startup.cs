@@ -55,7 +55,7 @@ namespace VoteWithYourWallet
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                //app.UseBrowserLink();
+                app.UseBrowserLink();
             }
             else
             {

@@ -14,29 +14,31 @@
         <div class="row justify-content-center">
             @if (SignInManager.IsSignedIn(User))
             {
-                <div class="mt-5">
+                <div class="mt-3">
                     <form class="text-center" method="get" asp-controller="Cause" asp-action="Create">
                         <button type="submit" class="btn btn-primary">Create Cause</button>
                     </form>
                 </div>
             }
-            <div class="col-lg-10 col-md-10 col-sm-12 mt-5">
+            <ul class="custom-ul col-lg-10 col-md-10 col-sm-10 mt-3">
                 @foreach (var item in Model)
                 {
-                    <div class="text-center card">
-                        <div class="card-header">
-                            <h2>@item.Name</h2>
+                    <li>
+                        <div class="text-center card mb-3 mx-3">
+                            <div class="card-header">
+                                <h2>@item.Name</h2>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="text-left mt-3">Subject: @item.Subject</h5>
+                                <h6 class="text-capitalize mt-3">Published By: @item.IdentityUser.UserName</h6>
+                            </div>
+                            <div class="pb-3">
+                                <a asp-controller="Cause" asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary">Details</a>
+                            </div>
                         </div>
-                        <div class="card-body">
-                            <h5 class="text-left mt-3">Subject: @item.Subject</h5>
-                            <h6 class="text-capitalize mt-3">Published By: @item.IdentityUser.UserName</h6>
-                        </div>
-                        <div class="pb-3">
-                            <a asp-controller="Cause" asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary">Details</a>
-                        </div>
-                    </div>
+                    </li>
                 }
-            </div>
+            </ul>
         </div>
     </div>
 }
@@ -47,7 +49,7 @@ else
             <div class="col-lg-8 col-md-12 col-sm-12">
                 @if (SignInManager.IsSignedIn(User))
                 {
-                    <div class="m-5">
+                    <div class="m-3">
                         <form class="text-center" method="get" asp-controller="Cause" asp-action="Create">
                             <button type="submit" class="btn btn-primary">Create Cause</button>
                         </form>
